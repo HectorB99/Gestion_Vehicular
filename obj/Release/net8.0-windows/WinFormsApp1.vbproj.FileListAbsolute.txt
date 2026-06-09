@@ -82,3 +82,5 @@ C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release
 C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release\net8.0-windows\WinFormsApp1.Form_detalles_servicio.resources
 C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release\net8.0-windows\WinFormsApp1.Form_tipo_refaccion.resources
 C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release\net8.0-windows\WinFormsApp1.Form_mostrador_fotos.resources
+C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release\net8.0-windows\WinFormsApp1.Form_conductores.resources
+C:\Users\contabilidad navojoa\source\repos\WinFormsApp1\WinFormsApp1\obj\Release\net8.0-windows\WinFormsApp1.sourcelink.json

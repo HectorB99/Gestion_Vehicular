@@ -97,6 +97,11 @@ Public Class Form1
         Me.Hide()
         Form_tipo_refaccion.Show()
     End Sub
+
+    Private Sub ConductoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConductoresToolStripMenuItem.Click
+        Me.Hide()
+        Form_conductores.Show()
+    End Sub
 End Class
 
 Module GlobalModule

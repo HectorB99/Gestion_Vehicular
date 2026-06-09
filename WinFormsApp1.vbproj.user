@@ -13,6 +13,9 @@
     <Compile Update="Form_compra_piezas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form_conductores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Form_consulta_vehiculo.vb">
       <SubType>Form</SubType>
     </Compile>

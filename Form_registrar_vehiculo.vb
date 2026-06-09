@@ -48,16 +48,16 @@ Public Class Form_registrar_vehiculo
         Dim sqlstr As New SqlCommand("
             INSERT INTO vehiculos (
                 claveinterna, 
-                marca, 
-                linea, 
-                modelo, 
-                color, 
-                placa, 
-                tipo_motor, 
+                marca,
+                linea,
+                modelo,
+                color,
+                placa,
+                tipo_motor,
                 llantas, 
                 tipo_combustible, 
                 num_serie,
-                estatus) 
+                estatus)
             VALUES (
                 @clave, 
                 @marcavechiculo, 

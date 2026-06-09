@@ -181,8 +181,6 @@ Public Class Form_reporte_controlvehicular
         DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         DataGridView1.Columns("comentarios").DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-
-
         constr.Close()
     End Sub
 

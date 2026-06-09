@@ -35,6 +35,7 @@ Partial Class Form1
         UtileriasToolStripMenuItem = New ToolStripMenuItem()
         ProveedoresToolStripMenuItem = New ToolStripMenuItem()
         TiposDeRefacciónToolStripMenuItem = New ToolStripMenuItem()
+        ConductoresToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -105,7 +106,7 @@ Partial Class Form1
         ' 
         ' UtileriasToolStripMenuItem
         ' 
-        UtileriasToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ProveedoresToolStripMenuItem, TiposDeRefacciónToolStripMenuItem})
+        UtileriasToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ProveedoresToolStripMenuItem, TiposDeRefacciónToolStripMenuItem, ConductoresToolStripMenuItem})
         UtileriasToolStripMenuItem.Name = "UtileriasToolStripMenuItem"
         UtileriasToolStripMenuItem.Size = New Size(61, 20)
         UtileriasToolStripMenuItem.Text = "Utilerias"
@@ -113,14 +114,20 @@ Partial Class Form1
         ' ProveedoresToolStripMenuItem
         ' 
         ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
-        ProveedoresToolStripMenuItem.Size = New Size(173, 22)
+        ProveedoresToolStripMenuItem.Size = New Size(180, 22)
         ProveedoresToolStripMenuItem.Text = "Proveedores"
         ' 
         ' TiposDeRefacciónToolStripMenuItem
         ' 
         TiposDeRefacciónToolStripMenuItem.Name = "TiposDeRefacciónToolStripMenuItem"
-        TiposDeRefacciónToolStripMenuItem.Size = New Size(173, 22)
+        TiposDeRefacciónToolStripMenuItem.Size = New Size(180, 22)
         TiposDeRefacciónToolStripMenuItem.Text = "Tipos de Refacción"
+        ' 
+        ' ConductoresToolStripMenuItem
+        ' 
+        ConductoresToolStripMenuItem.Name = "ConductoresToolStripMenuItem"
+        ConductoresToolStripMenuItem.Size = New Size(180, 22)
+        ConductoresToolStripMenuItem.Text = "Conductores"
         ' 
         ' Form1
         ' 
@@ -151,4 +158,5 @@ Partial Class Form1
     Friend WithEvents CompraDeRefaccionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegistroDeServiciosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TiposDeRefacciónToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConductoresToolStripMenuItem As ToolStripMenuItem
 End Class

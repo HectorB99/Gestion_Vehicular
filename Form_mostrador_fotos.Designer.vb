@@ -34,6 +34,7 @@ Partial Class Form_mostrador_fotos
         PictureBox1.Location = New Point(146, 12)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(670, 674)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
         ' 

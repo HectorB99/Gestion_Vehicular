@@ -298,8 +298,6 @@ Public Class Form_consulta_vehiculo
         lbl_num_serie.Text = row("num_serie").ToString()
     End Sub
 
-
-
     Public Sub CV_GuardarConsulta()
         Dim selectedItem As ComboBoxItem = CType(cb_vehiculos.SelectedItem, ComboBoxItem)
         'Dim fechaActual As Date = Now.Date

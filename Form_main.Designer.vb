@@ -114,19 +114,19 @@ Partial Class Form1
         ' ProveedoresToolStripMenuItem
         ' 
         ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
-        ProveedoresToolStripMenuItem.Size = New Size(180, 22)
+        ProveedoresToolStripMenuItem.Size = New Size(173, 22)
         ProveedoresToolStripMenuItem.Text = "Proveedores"
         ' 
         ' TiposDeRefacciónToolStripMenuItem
         ' 
         TiposDeRefacciónToolStripMenuItem.Name = "TiposDeRefacciónToolStripMenuItem"
-        TiposDeRefacciónToolStripMenuItem.Size = New Size(180, 22)
+        TiposDeRefacciónToolStripMenuItem.Size = New Size(173, 22)
         TiposDeRefacciónToolStripMenuItem.Text = "Tipos de Refacción"
         ' 
         ' ConductoresToolStripMenuItem
         ' 
         ConductoresToolStripMenuItem.Name = "ConductoresToolStripMenuItem"
-        ConductoresToolStripMenuItem.Size = New Size(180, 22)
+        ConductoresToolStripMenuItem.Size = New Size(173, 22)
         ConductoresToolStripMenuItem.Text = "Conductores"
         ' 
         ' Form1

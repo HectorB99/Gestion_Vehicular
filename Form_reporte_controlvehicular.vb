@@ -97,10 +97,10 @@ Public Class Form_reporte_controlvehicular
         Dim sqlstr As SqlCommand = Nothing
         Dim consulta As String
 
-        consulta = "SELECT 
+        consulta = "SELECT
                         idcontrol, 
                         fecha_captura, 
-                        fecha_cambio_aceite, 
+                        fecha_cambio_aceite,
                         fecha_prox_cambio_aceite, 
                         kilometraje_servicio, 
                         kilometraje_prox_servicio, 

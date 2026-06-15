@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
-Imports ClosedXML.Excel
 Imports System.IO
+Imports ClosedXML.Excel
+Imports DocumentFormat.OpenXml.Spreadsheet
 Imports WinFormsApp1.Form_consulta_vehiculo
 
 Public Class Form_reporte_controlvehicular
@@ -99,29 +100,16 @@ Public Class Form_reporte_controlvehicular
 
         consulta = "SELECT
                         idcontrol, 
-                        fecha_captura, 
-                        fecha_cambio_aceite,
-                        fecha_prox_cambio_aceite, 
-                        kilometraje_servicio, 
-                        kilometraje_prox_servicio, 
-                        fecha_cambio_llanta, 
-                        fecha_prox_cambio_llanta, 
-                        poliza_seguro, 
-                        fecha_vigencia_poliza,
-                        fecha_vigencia_lic_conductor, 
+                        fecha_captura,
+                        kilometraje_servicio,
+                        kilometraje_prox_servicio,
                         kilometraje_ant, 
-                        kilometraje_nue, 
-                        fecha_cambio_bateria, 
-                        fecha_ultimo_taller, 
-                        gas_semanal, 
-                        rendimiento, 
-                        comentarios, 
-                        nombre_chofer, 
-                        fecha_vigencia_tarjeta_circulacion, 
-                        hora_entrada, 
-                        hora_salida, 
-                        limpieza, 
-                        folio_ticket, 
+                        kilometraje_nue,
+                        comentarios,
+                        nombre_chofer,
+                        CONVERT(VARCHAR(5), hora_entrada, 108) AS hora_entrada,
+                        limpieza,
+                        folio_ticket,
                         litros_gasolina,
                         precio_gasolina, 
                         total_gasolina, 
@@ -135,6 +123,7 @@ Public Class Form_reporte_controlvehicular
             consulta = consulta + " WHERE idvehiculo = '" & selectedItem.id & "' AND fecha_captura BETWEEN @fecha1 AND @fecha2"
         End If
 
+        consulta = consulta + " ORDER BY fecha_captura ASC"
         sqlstr = New SqlCommand(consulta, constr)
 
         sqlstr.Parameters.Add("@fecha1", SqlDbType.Date).Value = dtp_fechainicial.Value
@@ -150,28 +139,15 @@ Public Class Form_reporte_controlvehicular
 
         DataGridView1.Columns("idcontrol").Visible = False
         DataGridView1.Columns("fecha_captura").HeaderText = "Fecha de Captura"
-        DataGridView1.Columns("fecha_cambio_aceite").HeaderText = "Fecha del Ultimo Cambio de Aceite"
-        DataGridView1.Columns("fecha_prox_cambio_aceite").HeaderText = "Fecha del Proximo Cambio de Aceite"
         DataGridView1.Columns("kilometraje_servicio").HeaderText = "Kilometraje en el Ultimo Servicio"
-        DataGridView1.Columns("kilometraje_prox_servicio").HeaderText = "Kilometraje para el Siguiente Servicio"
-        DataGridView1.Columns("fecha_cambio_llanta").HeaderText = "Fecha del Ultimo Cambio de Llantas"
-        DataGridView1.Columns("fecha_prox_cambio_llanta").HeaderText = "Fecha del Proximo Cambio de Llantas"
-        DataGridView1.Columns("poliza_seguro").HeaderText = "Poliza de Seguro"
-        DataGridView1.Columns("fecha_vigencia_poliza").HeaderText = "Vigencia de Poliza"
-        DataGridView1.Columns("fecha_vigencia_lic_conductor").HeaderText = "Vigencia de Licencia del Conductor"
-        DataGridView1.Columns("kilometraje_ant").HeaderText = "Kilometraje Anterior"
-        DataGridView1.Columns("kilometraje_nue").HeaderText = "Kilometraje Nuevo"
-        DataGridView1.Columns("fecha_cambio_bateria").HeaderText = "Fecha de Ultimo Cambio de Batería"
-        DataGridView1.Columns("fecha_ultimo_taller").HeaderText = "Ultima visita al taller"
-        DataGridView1.Columns("gas_semanal").HeaderText = "Consumo de Gasolina Semanal"
-        DataGridView1.Columns("rendimiento").HeaderText = "Rendimiento (km/ltr)"
+        DataGridView1.Columns("kilometraje_prox_servicio").HeaderText = "Kilometraje faltante para el Siguiente Servicio"
+        DataGridView1.Columns("kilometraje_ant").HeaderText = "Kilometraje de Ultimo Registro"
+        DataGridView1.Columns("kilometraje_nue").HeaderText = "Kilometraje Actual"
         DataGridView1.Columns("comentarios").HeaderText = "Comentarios"
         DataGridView1.Columns("comentarios").Width = 200
         DataGridView1.Columns("nombre_chofer").HeaderText = "Chofer"
-        DataGridView1.Columns("fecha_vigencia_tarjeta_circulacion").HeaderText = "Vigencia de la Tarjeta de Circulación"
-        DataGridView1.Columns("hora_entrada").HeaderText = "Hora de Entrada"
-        DataGridView1.Columns("hora_salida").HeaderText = "Hora de Salida"
-        DataGridView1.Columns("limpieza").HeaderText = "Limpieza"
+        DataGridView1.Columns("hora_entrada").HeaderText = "Hora de Inspección"
+        DataGridView1.Columns("limpieza").HeaderText = "Limpieza y Orden de la Cabina"
         DataGridView1.Columns("folio_ticket").HeaderText = "Folio del Ticket de Gasolina"
         DataGridView1.Columns("litros_gasolina").HeaderText = "Litros de gasolina"
         DataGridView1.Columns("precio_gasolina").HeaderText = "Precio/ltr de gasolina"
@@ -377,24 +353,34 @@ Public Class Form_reporte_controlvehicular
     End Sub
 
     Private Sub ExportarExcel()
-
+        Dim selectedItem As ComboBoxItem = CType(cb_vehiculos.SelectedItem, ComboBoxItem)
+        Dim claveunidad As String
         Dim rutaCarpeta As String = "C:\Reporte Vehicular\"
         Dim nombreArchivo As String
+        claveunidad = selectedItem.clave
+
+        If claveunidad = "Todos los vehiculos" Then
+            claveunidad = "GENERAL"
+        End If
 
         If cb_tipo_reporte.SelectedValue = 1 Then
-            nombreArchivo = "reporte_gestion_vehicular_" &
+            nombreArchivo = "REPORTE_BITACORA_" &
+            claveunidad & "_" &
             DateTime.Now.ToString("dd_MM_yy") &
             ".xlsx"
         ElseIf cb_tipo_reporte.SelectedValue = 2 Then
-            nombreArchivo = "reporte_compra_refacciones_" &
+            nombreArchivo = "REPORTE_COMPRA_REFACCIONES_" &
+            claveunidad & "_" &
             DateTime.Now.ToString("dd_MM_yy") &
             ".xlsx"
         ElseIf cb_tipo_reporte.SelectedValue = 3 Then
-            nombreArchivo = "reporte_servicios_" &
+            nombreArchivo = "REPORTE_SERVICIOS_" &
+            claveunidad & "_" &
             DateTime.Now.ToString("dd_MM_yy") &
             ".xlsx"
         ElseIf cb_tipo_reporte.SelectedValue = 4 Then
-            nombreArchivo = "reporte_gasolina_semanal_" &
+            nombreArchivo = "REPORTE_GASOLINA_SEMANAL_" &
+            claveunidad & "_" &
             DateTime.Now.ToString("dd_MM_yy") &
             ".xlsx"
         End If
@@ -408,19 +394,26 @@ Public Class Form_reporte_controlvehicular
         Dim wb As New XLWorkbook()
         Dim ws = wb.Worksheets.Add("Datos")
 
-        For i As Integer = 0 To DataGridView1.Columns.Count - 1
+        Dim rango = ws.Range("G2:I2")
+        With rango
+            .Merge()
+            .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
+        End With
+        ws.Cell(2, 7).Value = "Reporte de Bitacora " & claveunidad & " " & dtp_fechainicial.Value & "-" & dtp_fechafinal.Value
 
-            ws.Cell(1, i + 1).Value = DataGridView1.Columns(i).HeaderText
-            ws.Cell(1, i + 1).Style.Font.Bold = True
+        For i As Integer = 1 To DataGridView1.Columns.Count - 1
 
+            ws.Cell(5, i + 1).Value = DataGridView1.Columns(i).HeaderText
+            ws.Cell(5, i + 1).Style.Font.Bold = True
+            'ws.Cell(5, i + 1).Style.Fill.BackgroundColor = 
         Next
 
-        Dim filaExcel As Integer = 2
+        Dim filaExcel As Integer = 6
 
         For Each row As DataGridViewRow In DataGridView1.Rows
 
             If Not row.IsNewRow Then
-                For col As Integer = 0 To DataGridView1.Columns.Count - 1
+                For col As Integer = 1 To DataGridView1.Columns.Count - 1
                     Dim valor = row.Cells(col).Value
 
                     If valor IsNot Nothing Then
@@ -440,7 +433,35 @@ Public Class Form_reporte_controlvehicular
 
         Next
 
-        ws.Columns().AdjustToContents()
+        ws.Style.Font.FontSize = 18
+
+        ws.Row(5).Height = 73.5
+        ws.Column(2).Width = 16.71
+        ws.Column(3).Width = 19.57
+        ws.Column(4).Width = 28.29
+        ws.Column(5).Width = 19.57
+        ws.Column(6).Width = 19.0
+        ws.Column(7).Width = 64.0
+        ws.Column(8).Width = 25.29
+        ws.Column(9).Width = 18.14
+        ws.Column(10).Width = 15.29
+        ws.Column(11).Width = 19.29
+        ws.Column(12).Width = 12.57
+        ws.Column(13).Width = 17.14
+        ws.Column(14).Width = 15.43
+        ws.Column(15).Width = 20.43
+        ws.Column(16).Width = 18.29
+
+        ws.PageSetup.PagesWide = 1
+        ws.PageSetup.PagesTall = False
+
+        ws.PageSetup.PageOrientation = XLPageOrientation.Landscape
+
+        ws.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thin
+        ws.RangeUsed().Style.Border.InsideBorder = XLBorderStyleValues.Thin
+
+        ws.RangeUsed().Style.Alignment.WrapText = True
+        'ws.Columns().AdjustToContents()
 
         wb.SaveAs(rutaCompleta)
 

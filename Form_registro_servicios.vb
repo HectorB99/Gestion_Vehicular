@@ -115,6 +115,7 @@ Public Class Form_registro_servicios
 
         If idservicio <> 0 Then
             CV_GuardarDetallesServicio(idservicio)
+            CV_ActualizarRegistroVehicular(dtp_entrada.Value, selectedItem.id)
         End If
 
     End Sub
@@ -163,6 +164,22 @@ Public Class Form_registro_servicios
 
         DataGridView1.DataSource = Nothing
         DataGridView1.Refresh()
+    End Sub
+
+    Public Sub CV_ActualizarRegistroVehicular(fecha, idvehiculo)
+        Dim sqlstr As New SqlCommand("
+            UPDATE vehiculos
+            SET
+                fecha_ultima_visita_taller = @fecha_ultima_visita_taller
+            WHERE idvehiculo = @idvehiculo",
+        constr)
+
+        sqlstr.Parameters.AddWithValue("@idvehiculo", idvehiculo)
+        sqlstr.Parameters.Add("@fecha_ultima_visita_taller", SqlDbType.Date).Value = fecha
+
+        constr.Open()
+        sqlstr.ExecuteScalar()
+        constr.Close()
     End Sub
 
     Public Sub CV_EditarRegistro()

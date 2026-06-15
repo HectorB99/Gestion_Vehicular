@@ -19,24 +19,6 @@ Public Class Form_consulta_vehiculo
         Me.Width = 500
         dtm_fecha_captura.Format = DateTimePickerFormat.Custom
         dtm_fecha_captura.CustomFormat = " "
-        dtp_llantas.Format = DateTimePickerFormat.Custom
-        dtp_llantas.CustomFormat = " "
-        dtp_prox_llantas.Format = DateTimePickerFormat.Custom
-        dtp_prox_llantas.CustomFormat = " "
-        dtp_aceite.Format = DateTimePickerFormat.Custom
-        dtp_aceite.CustomFormat = " "
-        dtp_prox_aceite.Format = DateTimePickerFormat.Custom
-        dtp_prox_aceite.CustomFormat = " "
-        dtp_vigencia_poliza.Format = DateTimePickerFormat.Custom
-        dtp_vigencia_poliza.CustomFormat = " "
-        dtp_vigencia_licencia.Format = DateTimePickerFormat.Custom
-        dtp_vigencia_licencia.CustomFormat = " "
-        dtp_ultima_bateria.Format = DateTimePickerFormat.Custom
-        dtp_ultima_bateria.CustomFormat = " "
-        dtp_ultimo_taller.Format = DateTimePickerFormat.Custom
-        dtp_ultimo_taller.CustomFormat = " "
-        dtp_vigencia_tarjeta.Format = DateTimePickerFormat.Custom
-        dtp_vigencia_tarjeta.CustomFormat = " "
 
         edicion_activada = 0
 
@@ -54,6 +36,7 @@ Public Class Form_consulta_vehiculo
             cb_vehiculos.Items.Add(item)
         End While
         constr.Close()
+        Me.CenterToScreen()
     End Sub
 
     Public Class ComboBoxItem
@@ -123,45 +106,11 @@ Public Class Form_consulta_vehiculo
                 Next
             End If
 
-
-            'If (row("fecha_captura") = Now.Date) Then
-            'edicion_activada = 1
-            'End If
-
             If Not IsDBNull(row("fecha_captura")) Then
                 dtm_fecha_captura.CustomFormat = "dd/MM/yyyy"
                 dtm_fecha_captura.Value = Convert.ToDateTime(row("fecha_captura"))
             Else
                 dtm_fecha_captura.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("fecha_cambio_llanta")) Then
-                dtp_llantas.CustomFormat = "dd/MM/yyyy"
-                dtp_llantas.Value = Convert.ToDateTime(row("fecha_cambio_llanta"))
-
-            Else
-                dtp_llantas.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("fecha_prox_cambio_llanta")) Then
-                dtp_prox_llantas.CustomFormat = "dd/MM/yyyy"
-                dtp_prox_llantas.Value = Convert.ToDateTime(row("fecha_prox_cambio_llanta"))
-            Else
-                dtp_prox_llantas.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("fecha_cambio_aceite")) Then
-                dtp_aceite.CustomFormat = "dd/MM/yyyy"
-                dtp_aceite.Value = Convert.ToDateTime(row("fecha_cambio_aceite"))
-            Else
-                dtp_aceite.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("fecha_prox_cambio_aceite")) Then
-                dtp_prox_aceite.CustomFormat = "dd/MM/yyyy"
-                dtp_prox_aceite.Value = Convert.ToDateTime(row("fecha_prox_cambio_aceite"))
-            Else
-                dtp_prox_aceite.CustomFormat = " "
             End If
 
             If Not IsDBNull(row("kilometraje_servicio")) Then
@@ -170,24 +119,6 @@ Public Class Form_consulta_vehiculo
 
             If Not IsDBNull(row("kilometraje_prox_servicio")) Then
                 tb_km_prox_servicio.Text = row("kilometraje_prox_servicio").ToString()
-            End If
-
-            If Not IsDBNull(row("fecha_vigencia_poliza")) Then
-                dtp_vigencia_poliza.CustomFormat = "dd/MM/yyyy"
-                dtp_vigencia_poliza.Value = Convert.ToDateTime(row("fecha_vigencia_poliza"))
-            Else
-                dtp_vigencia_poliza.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("fecha_vigencia_lic_conductor")) Then
-                dtp_vigencia_licencia.CustomFormat = "dd/MM/yyyy"
-                dtp_vigencia_licencia.Value = Convert.ToDateTime(row("fecha_vigencia_lic_conductor"))
-            Else
-                dtp_vigencia_licencia.CustomFormat = " "
-            End If
-
-            If Not IsDBNull(row("poliza_seguro")) Then
-                txt_poliza.Text = row("poliza_seguro").ToString()
             End If
 
             If Not IsDBNull(row("kilometraje_ant")) Then
@@ -202,33 +133,12 @@ Public Class Form_consulta_vehiculo
                 txt_comentarios.Text = row("comentarios").ToString()
             End If
 
-            If Not IsDBNull(row("fecha_ultimo_taller")) Then
-                dtp_ultimo_taller.CustomFormat = "dd/MM/yyyy"
-                dtp_ultimo_taller.Value = Convert.ToDateTime(row("fecha_ultimo_taller"))
-            Else
-                dtp_ultimo_taller.CustomFormat = " "
-            End If
-
             If Not IsDBNull(row("gas_semanal")) Then
                 txt_gas_semanal.Text = row("gas_semanal").ToString()
             End If
 
-            If Not IsDBNull(row("fecha_cambio_bateria")) Then
-                dtp_ultima_bateria.CustomFormat = "dd/MM/yyyy"
-                dtp_ultima_bateria.Value = Convert.ToDateTime(row("fecha_cambio_bateria"))
-            Else
-                dtp_ultima_bateria.CustomFormat = " "
-            End If
-
             If Not IsDBNull(row("nombre_chofer")) Then
                 txt_nombre_chofer.Text = row("nombre_chofer").ToString()
-            End If
-
-            If Not IsDBNull(row("fecha_vigencia_tarjeta_circulacion")) Then
-                dtp_vigencia_tarjeta.CustomFormat = "dd/MM/yyyy"
-                dtp_vigencia_tarjeta.Value = Convert.ToDateTime(row("fecha_vigencia_tarjeta_circulacion"))
-            Else
-                dtp_vigencia_tarjeta.CustomFormat = " "
             End If
 
             If Not IsDBNull(row("rendimiento")) Then
@@ -259,13 +169,9 @@ Public Class Form_consulta_vehiculo
                 tb_monto_casetas.Text = row("monto_casetas").ToString()
             End If
 
-            'If Not IsDBNull(row("hora_entrada")) Then
-            '    tp_horario_entrada.Value = DateTime.Today.Add(TimeSpan.Parse(row("hora_entrada")))
-            'End If
-
-            'If Not IsDBNull(row("hora_salida")) Then
-            '    tp_horario_salida.Value = DateTime.Today.Add(TimeSpan.Parse(row("hora_salida")))
-            'End If
+            If Not IsDBNull(row("hora_entrada")) Then
+                tp_horario_entrada.Value = DateTime.Today.Add(CType(row("hora_entrada"), TimeSpan))
+            End If
 
             If Not IsDBNull(row("limpieza")) Then
                 If row("limpieza") = "si" Then
@@ -303,28 +209,17 @@ Public Class Form_consulta_vehiculo
         'Dim fechaActual As Date = Now.Date
         Dim sqlstr As New SqlCommand("
             INSERT INTO control_vehicular (
-                idvehiculo, 
-                fecha_cambio_aceite, 
-                fecha_prox_cambio_aceite, 
+                idvehiculo,
                 kilometraje_servicio, 
-                kilometraje_prox_servicio,  
-                fecha_cambio_llanta, 
-                fecha_prox_cambio_llanta,   
-                poliza_seguro, 
-                fecha_vigencia_poliza, 
-                fecha_vigencia_lic_conductor, 
-                kilometraje_ant, 
+                kilometraje_prox_servicio,
+                kilometraje_ant,
                 kilometraje_nue, 
                 gas_semanal, 
                 rendimiento, 
                 fecha_captura, 
-                fecha_cambio_bateria, 
-                fecha_ultimo_taller, 
                 comentarios,
-                nombre_chofer,
-                fecha_vigencia_tarjeta_circulacion,       
+                nombre_chofer,       
                 hora_entrada,
-                hora_salida,
                 limpieza,
                 folio_ticket,
                 litros_gasolina,
@@ -333,28 +228,17 @@ Public Class Form_consulta_vehiculo
                 monto_permisos,
                 monto_casetas)
             VALUES (
-                @idcarro, 
-                @cambio_aceite,     
-                @prox_aceite, 
+                @idcarro,
                 @servicio, 
-                @prox_servicio, 
-                @llanta, 
-                @prox_llanta, 
-                @poliza,    
-                @vigencia_poliza, 
-                @fecha_lic, 
+                @prox_servicio,
                 @kma, 
                 @kmn, 
                 @gasolina, 
                 @rendi, 
-                @fecha_hoy, 
-                @fecha_bateria, 
-                @fecha_taller, 
+                @fecha_hoy,
                 @comentario,
-                @nombre_chofer,
-                @fecha_vigencia_tarjeta_circulacion,       
+                @nombre_chofer,      
                 @hora_entrada,
-                @hora_salida,
                 @limpieza,
                 @folio_ticket,
                 @litros_gasolina,
@@ -364,15 +248,8 @@ Public Class Form_consulta_vehiculo
                 @monto_casetas)", constr)
 
         sqlstr.Parameters.AddWithValue("@idcarro", selectedItem.id)
-        sqlstr.Parameters.Add("@cambio_aceite", SqlDbType.Date).Value = dtp_aceite.Value
-        sqlstr.Parameters.Add("@prox_aceite", SqlDbType.Date).Value = dtp_prox_aceite.Value
         sqlstr.Parameters.AddWithValue("@servicio", tb_km_ultimo_servicio.Text)
         sqlstr.Parameters.AddWithValue("@prox_servicio", tb_km_prox_servicio.Text)
-        sqlstr.Parameters.Add("@llanta", SqlDbType.Date).Value = dtp_llantas.Value
-        sqlstr.Parameters.Add("@prox_llanta", SqlDbType.Date).Value = dtp_prox_llantas.Value
-        sqlstr.Parameters.AddWithValue("@poliza", txt_poliza.Text)
-        sqlstr.Parameters.Add("@vigencia_poliza", SqlDbType.Date).Value = dtp_vigencia_poliza.Value
-        sqlstr.Parameters.Add("@fecha_lic", SqlDbType.Date).Value = dtp_vigencia_licencia.Value
         sqlstr.Parameters.AddWithValue("@kma", txt_kilometrajea.Text)
         sqlstr.Parameters.AddWithValue("@kmn", txt_kilometrajen.Text)
         'sqlstr.Parameters.AddWithValue("@gasolina", txt_gas_semanal.Text)
@@ -384,17 +261,9 @@ Public Class Form_consulta_vehiculo
 
         sqlstr.Parameters.AddWithValue("@rendi", txt_rendimiento.Text)
         sqlstr.Parameters.Add("@fecha_hoy", SqlDbType.Date).Value = dtm_fecha_captura.Value
-        sqlstr.Parameters.Add("@fecha_bateria", SqlDbType.Date).Value = dtp_ultima_bateria.Value
-        If dtp_ultimo_taller.Value.Date <> DateTime.Today Then
-            sqlstr.Parameters.Add("@fecha_taller", SqlDbType.Date).Value = dtp_ultimo_taller.Value
-        Else
-            sqlstr.Parameters.Add("@fecha_taller", SqlDbType.Date).Value = DBNull.Value
-        End If
         sqlstr.Parameters.AddWithValue("@comentario", txt_comentarios.Text)
         sqlstr.Parameters.AddWithValue("@nombre_chofer", txt_nombre_chofer.Text)
-        sqlstr.Parameters.Add("@fecha_vigencia_tarjeta_circulacion", SqlDbType.Date).Value = dtp_vigencia_tarjeta.Value
         sqlstr.Parameters.Add("@hora_entrada", SqlDbType.Time).Value = tp_horario_entrada.Value.TimeOfDay
-        sqlstr.Parameters.Add("@hora_salida", SqlDbType.Time).Value = tp_horario_salida.Value.TimeOfDay
 
         Dim limpieza As String
         If cbx_limpieza.Checked Then
@@ -437,28 +306,17 @@ Public Class Form_consulta_vehiculo
         Dim sqlstr As New SqlCommand("
             UPDATE control_vehicular
             SET 
-                idvehiculo = @idcarro, 
-                fecha_cambio_aceite = @cambio_aceite, 
-                fecha_prox_cambio_aceite = @prox_aceite, 
+                idvehiculo = @idcarro,
                 kilometraje_servicio = @servicio, 
-                kilometraje_prox_servicio = @prox_servicio, 
-                fecha_cambio_llanta = @llanta, 
-                fecha_prox_cambio_llanta = @prox_llanta,   
-                poliza_seguro = @poliza, 
-                fecha_vigencia_poliza = @vigencia_poliza, 
-                fecha_vigencia_lic_conductor = @fecha_lic, 
+                kilometraje_prox_servicio = @prox_servicio,
                 kilometraje_ant = @kma,
                 kilometraje_nue = @kmn, 
                 gas_semanal = @gasolina,
                 rendimiento = @rendi, 
-                fecha_captura = @fecha_hoy, 
-                fecha_cambio_bateria = @fecha_bateria, 
-                fecha_ultimo_taller = @fecha_taller, 
+                fecha_captura = @fecha_hoy,
                 comentarios = @comentario,
-                nombre_chofer = @nombre_chofer,
-                fecha_vigencia_tarjeta_circulacion = @fecha_vigencia_tarjeta_circulacion,       
+                nombre_chofer = @nombre_chofer,     
                 hora_entrada = @hora_entrada,
-                hora_salida = @hora_salida,
                 limpieza = @limpieza,
                 folio_ticket = @folio_ticket,
                 litros_gasolina = @litros_gasolina,
@@ -471,32 +329,18 @@ Public Class Form_consulta_vehiculo
 
         sqlstr.Parameters.AddWithValue("@idcontrol", idcontrol)
         sqlstr.Parameters.AddWithValue("@idcarro", selectedItem.id)
-        sqlstr.Parameters.Add("@cambio_aceite", SqlDbType.Date).Value = dtp_aceite.Value
-        sqlstr.Parameters.Add("@prox_aceite", SqlDbType.Date).Value = dtp_prox_aceite.Value
         sqlstr.Parameters.AddWithValue("@servicio", tb_km_ultimo_servicio.Text)
         sqlstr.Parameters.AddWithValue("@prox_servicio", tb_km_prox_servicio.Text)
-        sqlstr.Parameters.Add("@llanta", SqlDbType.Date).Value = dtp_llantas.Value
-        sqlstr.Parameters.Add("@prox_llanta", SqlDbType.Date).Value = dtp_prox_llantas.Value
-        sqlstr.Parameters.AddWithValue("@poliza", txt_poliza.Text)
-        sqlstr.Parameters.Add("@vigencia_poliza", SqlDbType.Date).Value = dtp_vigencia_poliza.Value
-        sqlstr.Parameters.Add("@fecha_lic", SqlDbType.Date).Value = dtp_vigencia_licencia.Value
         sqlstr.Parameters.AddWithValue("@kma", txt_kilometrajea.Text)
         sqlstr.Parameters.AddWithValue("@kmn", txt_kilometrajen.Text)
         'sqlstr.Parameters.AddWithValue("@gasolina", txt_gas_semanal.Text)
         sqlstr.Parameters.AddWithValue("@gasolina", SqlDbType.Float).Value = CDbl(txt_gas_semanal.Text)
         sqlstr.Parameters.AddWithValue("@rendi", txt_rendimiento.Text)
         sqlstr.Parameters.Add("@fecha_hoy", SqlDbType.Date).Value = dtm_fecha_captura.Value
-        sqlstr.Parameters.Add("@fecha_bateria", SqlDbType.Date).Value = dtp_ultima_bateria.Value
-        If dtp_ultimo_taller.Value.Date <> DateTime.Today Then
-            sqlstr.Parameters.Add("@fecha_taller", SqlDbType.Date).Value = dtp_ultimo_taller.Value
-        Else
-            sqlstr.Parameters.Add("@fecha_taller", SqlDbType.Date).Value = DBNull.Value
-        End If
         sqlstr.Parameters.AddWithValue("@comentario", txt_comentarios.Text)
         sqlstr.Parameters.AddWithValue("@nombre_chofer", txt_nombre_chofer.Text)
-        sqlstr.Parameters.Add("@fecha_vigencia_tarjeta_circulacion", SqlDbType.Date).Value = dtp_vigencia_tarjeta.Value
+
         sqlstr.Parameters.Add("@hora_entrada", SqlDbType.Time).Value = tp_horario_entrada.Value.TimeOfDay
-        sqlstr.Parameters.Add("@hora_salida", SqlDbType.Time).Value = tp_horario_salida.Value.TimeOfDay
 
         Dim limpieza As String
         If cbx_limpieza.Checked Then
@@ -528,26 +372,15 @@ Public Class Form_consulta_vehiculo
         btn_guardar.Hide()
         btn_reporte.Hide()
         btn_fotos.Hide()
-        Label2.Hide()
-        Label3.Hide()
-        Label4.Hide()
-        Label5.Hide()
         Label6.Hide()
         Label7.Hide()
-        Label8.Hide()
-        Label9.Hide()
-        Label10.Hide()
         Label11.Hide()
         Label12.Hide()
         Label13.Hide()
         Label14.Hide()
         Label15.Hide()
-        Label16.Hide()
-        Label17.Hide()
         Label18.Hide()
-        Label19.Hide()
         Label20.Hide()
-        Label21.Hide()
         Label22.Hide()
         Label23.Hide()
         Label24.Hide()
@@ -566,30 +399,19 @@ Public Class Form_consulta_vehiculo
         Label37.Hide()
         cbx_limpieza.Hide()
         txt_nombre_chofer.Hide()
-        dtp_vigencia_tarjeta.Hide()
         tp_horario_entrada.Hide()
-        tp_horario_salida.Hide()
         tb_gasolina_lts.Hide()
         tb_costo_gasolina.Hide()
         tb_costo_total.Hide()
         tb_folio_gasolina.Hide()
         tb_monto_permiso.Hide()
         tb_monto_casetas.Hide()
-        dtp_llantas.Hide()
-        dtp_prox_llantas.Hide()
-        dtp_aceite.Hide()
-        dtp_prox_aceite.Hide()
         tb_km_prox_servicio.Hide()
         tb_km_ultimo_servicio.Hide()
-        txt_poliza.Hide()
-        dtp_vigencia_poliza.Hide()
-        dtp_vigencia_licencia.Hide()
         txt_kilometrajea.Hide()
         txt_kilometrajen.Hide()
         txt_gas_semanal.Hide()
         txt_rendimiento.Hide()
-        dtp_ultima_bateria.Hide()
-        dtp_ultimo_taller.Hide()
         txt_comentarios.Hide()
         lbl_clave_interna.Hide()
         lbl_marca.Hide()
@@ -603,17 +425,8 @@ Public Class Form_consulta_vehiculo
         lbl_num_serie.Hide()
     End Sub
     Public Sub CV_ClearData()
-        dtp_llantas.CustomFormat = " "
-        dtp_prox_llantas.CustomFormat = " "
-        dtp_aceite.CustomFormat = " "
-        dtp_prox_aceite.CustomFormat = " "
-        dtp_vigencia_poliza.CustomFormat = " "
-        dtp_vigencia_licencia.CustomFormat = " "
-        dtp_ultima_bateria.CustomFormat = " "
-        dtp_ultimo_taller.CustomFormat = " "
-        dtp_vigencia_tarjeta.CustomFormat = " "
+
         tp_horario_entrada.CustomFormat = " "
-        tp_horario_salida.CustomFormat = " "
         cbx_limpieza.Checked = False
         txt_nombre_chofer.Clear()
         tb_gasolina_lts.Clear()
@@ -624,7 +437,6 @@ Public Class Form_consulta_vehiculo
         tb_monto_casetas.Clear()
         tb_km_prox_servicio.Clear()
         tb_km_ultimo_servicio.Clear()
-        txt_poliza.Clear()
         txt_kilometrajea.Clear()
         txt_kilometrajen.Clear()
         txt_gas_semanal.Clear()
@@ -703,26 +515,15 @@ Public Class Form_consulta_vehiculo
         btn_guardar.Show()
         btn_reporte.Show()
         btn_fotos.Show()
-        Label2.Show()
-        Label3.Show()
-        Label4.Show()
-        Label5.Show()
         Label6.Show()
         Label7.Show()
-        Label8.Show()
-        Label9.Show()
-        Label10.Show()
         Label11.Show()
         Label12.Show()
         Label13.Show()
         Label14.Show()
         Label15.Show()
-        Label16.Show()
-        Label17.Show()
         Label18.Show()
-        Label19.Show()
         Label20.Show()
-        Label21.Show()
         Label22.Show()
         Label23.Show()
         Label24.Show()
@@ -741,30 +542,19 @@ Public Class Form_consulta_vehiculo
         Label37.Show()
         cbx_limpieza.Show()
         txt_nombre_chofer.Show()
-        dtp_vigencia_tarjeta.Show()
         tp_horario_entrada.Show()
-        tp_horario_salida.Show()
         tb_gasolina_lts.Show()
         tb_costo_gasolina.Show()
         tb_costo_total.Show()
         tb_folio_gasolina.Show()
         tb_monto_permiso.Show()
         tb_monto_casetas.Show()
-        dtp_llantas.Show()
-        dtp_prox_llantas.Show()
-        dtp_aceite.Show()
-        dtp_prox_aceite.Show()
         tb_km_ultimo_servicio.Show()
         tb_km_prox_servicio.Show()
-        txt_poliza.Show()
-        dtp_vigencia_poliza.Show()
-        dtp_vigencia_licencia.Show()
         txt_kilometrajea.Show()
         txt_kilometrajen.Show()
         txt_gas_semanal.Show()
         txt_rendimiento.Show()
-        dtp_ultima_bateria.Show()
-        dtp_ultimo_taller.Show()
         txt_comentarios.Show()
         lbl_clave_interna.Show()
         lbl_marca.Show()
@@ -779,6 +569,7 @@ Public Class Form_consulta_vehiculo
     End Sub
 
     Private Sub btn_volver_Click_1(sender As Object, e As EventArgs) Handles btn_volver.Click
+        edicion_activada = 0
         Hide()
         Form_control_vehicular.Show()
         Height = 206
@@ -803,42 +594,9 @@ Public Class Form_consulta_vehiculo
         Hide()
         Form_reporte_controlvehicular.Show()
         edicion_activada = 0
-    End Sub
 
-    Private Sub dtp_llantas_ValueChanged(sender As Object, e As EventArgs) Handles dtp_llantas.ValueChanged
-        dtp_llantas.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_prox_llantas_ValueChanged(sender As Object, e As EventArgs) Handles dtp_prox_llantas.ValueChanged
-        dtp_prox_llantas.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_aceite_ValueChanged(sender As Object, e As EventArgs) Handles dtp_aceite.ValueChanged
-        dtp_aceite.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_prox_aceite_ValueChanged(sender As Object, e As EventArgs) Handles dtp_prox_aceite.ValueChanged
-        dtp_prox_aceite.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_vigencia_poliza_ValueChanged(sender As Object, e As EventArgs) Handles dtp_vigencia_poliza.ValueChanged
-        dtp_vigencia_poliza.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_vigencia_licencia_ValueChanged(sender As Object, e As EventArgs) Handles dtp_vigencia_licencia.ValueChanged
-        dtp_vigencia_licencia.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_ultima_bateria_ValueChanged(sender As Object, e As EventArgs) Handles dtp_ultima_bateria.ValueChanged
-        dtp_ultima_bateria.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_ultimo_taller_ValueChanged(sender As Object, e As EventArgs) Handles dtp_ultimo_taller.ValueChanged
-        dtp_ultimo_taller.CustomFormat = "dd/MM/yyyy"
-    End Sub
-
-    Private Sub dtp_vigencia_tarjeta_ValueChanged(sender As Object, e As EventArgs) Handles dtp_vigencia_tarjeta.ValueChanged
-        dtp_vigencia_tarjeta.CustomFormat = "dd/MM/yyyy"
+        CV_Hide()
+        CV_ClearData()
     End Sub
 
     Private Sub txt_kilometrajen_TextChanged_1(sender As Object, e As EventArgs) Handles txt_kilometrajen.Leave

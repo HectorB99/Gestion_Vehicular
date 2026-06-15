@@ -15,20 +15,20 @@
                 nombre_label_vehiculo = nombre_label_vehiculo & indiceLabel
                 nombre_label_kilometraje = nombre_label_kilometraje & indiceLabel
                 Me.Controls(nombre_label_vehiculo).Text = dt.Rows(i)(0).ToString()
-                Me.Controls(nombre_label_kilometraje).Text = dt.Rows(i)(9).ToString()
+                Me.Controls(nombre_label_kilometraje).Text = dt.Rows(i)(5).ToString()
                 Me.Controls(nombre_label_vehiculo).Visible = True
                 Me.Controls(nombre_label_kilometraje).Visible = True
 
-                If dt.Rows(i)(9) = 0 Then
+                If dt.Rows(i)(5) = 0 Then
                     Me.Controls(nombre_label_vehiculo).ForeColor = Color.DarkRed
                     Me.Controls(nombre_label_kilometraje).ForeColor = Color.DarkRed
-                ElseIf dt.Rows(i)(9) > 0 And dt.Rows(i)(9) < 1000 Then
+                ElseIf dt.Rows(i)(5) > 0 And dt.Rows(i)(5) < 1000 Then
                     Me.Controls(nombre_label_vehiculo).ForeColor = Color.Red
                     Me.Controls(nombre_label_kilometraje).ForeColor = Color.Red
-                ElseIf dt.Rows(i)(9) > 1000 And dt.Rows(i)(9) < 2000 Then
+                ElseIf dt.Rows(i)(5) > 1000 And dt.Rows(i)(5) < 2000 Then
                     Me.Controls(nombre_label_vehiculo).ForeColor = Color.Goldenrod
                     Me.Controls(nombre_label_kilometraje).ForeColor = Color.Goldenrod
-                ElseIf dt.Rows(i)(9) > 2000 And dt.Rows(i)(9) < 5000 Then
+                ElseIf dt.Rows(i)(5) > 2000 And dt.Rows(i)(5) < 5000 Then
                     Me.Controls(nombre_label_vehiculo).ForeColor = Color.Green
                     Me.Controls(nombre_label_kilometraje).ForeColor = Color.Green
                 End If

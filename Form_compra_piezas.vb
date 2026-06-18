@@ -110,6 +110,8 @@ Public Class Form_compra_piezas
             )", constr)
 
 
+
+
         sqlstr.Parameters.Add("@fecha_compra", SqlDbType.Date).Value = dtp_compra.Value
         sqlstr.Parameters.Add("@fecha_captura", SqlDbType.Date).Value = fechaActual
         sqlstr.Parameters.AddWithValue("@idvehiculo", selectedItem.id)

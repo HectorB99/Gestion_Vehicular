@@ -171,6 +171,7 @@ Public Class Form_consulta_vehiculo
 
             If Not IsDBNull(row("hora_entrada")) Then
                 tp_horario_entrada.Value = DateTime.Today.Add(CType(row("hora_entrada"), TimeSpan))
+                tp_horario_entrada.CustomFormat = "HH:mm"
             End If
 
             If Not IsDBNull(row("limpieza")) Then

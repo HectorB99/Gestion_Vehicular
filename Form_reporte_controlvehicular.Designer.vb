@@ -34,6 +34,7 @@ Partial Class Form_reporte_controlvehicular
         btn_export_xlsx = New Button()
         Label1 = New Label()
         cb_tipo_reporte = New ComboBox()
+        btn_imprimir = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -89,7 +90,7 @@ Partial Class Form_reporte_controlvehicular
         ' 
         ' dtp_fechafinal
         ' 
-        dtp_fechafinal.Location = New Point(601, 51)
+        dtp_fechafinal.Location = New Point(601, 61)
         dtp_fechafinal.Name = "dtp_fechafinal"
         dtp_fechafinal.Size = New Size(118, 23)
         dtp_fechafinal.TabIndex = 16
@@ -98,7 +99,7 @@ Partial Class Form_reporte_controlvehicular
         ' lbl_hasta
         ' 
         lbl_hasta.AutoSize = True
-        lbl_hasta.Location = New Point(537, 51)
+        lbl_hasta.Location = New Point(539, 64)
         lbl_hasta.Name = "lbl_hasta"
         lbl_hasta.Size = New Size(37, 15)
         lbl_hasta.TabIndex = 15
@@ -127,7 +128,7 @@ Partial Class Form_reporte_controlvehicular
         btn_export_xlsx.Name = "btn_export_xlsx"
         btn_export_xlsx.Size = New Size(161, 41)
         btn_export_xlsx.TabIndex = 17
-        btn_export_xlsx.Text = "Exportar"
+        btn_export_xlsx.Text = "Exportar a Excel"
         btn_export_xlsx.UseVisualStyleBackColor = True
         ' 
         ' Label1
@@ -148,12 +149,23 @@ Partial Class Form_reporte_controlvehicular
         cb_tipo_reporte.Size = New Size(300, 23)
         cb_tipo_reporte.TabIndex = 19
         ' 
+        ' btn_imprimir
+        ' 
+        btn_imprimir.Font = New Font("Arial Narrow", 15.75F)
+        btn_imprimir.Location = New Point(998, 64)
+        btn_imprimir.Name = "btn_imprimir"
+        btn_imprimir.Size = New Size(158, 41)
+        btn_imprimir.TabIndex = 20
+        btn_imprimir.Text = "Imprimir"
+        btn_imprimir.UseVisualStyleBackColor = True
+        ' 
         ' Form_reporte_controlvehicular
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ActiveCaption
         ClientSize = New Size(1168, 750)
+        Controls.Add(btn_imprimir)
         Controls.Add(cb_tipo_reporte)
         Controls.Add(Label1)
         Controls.Add(btn_export_xlsx)
@@ -186,4 +198,5 @@ Partial Class Form_reporte_controlvehicular
     Friend WithEvents btn_export_xlsx As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents cb_tipo_reporte As ComboBox
+    Friend WithEvents btn_imprimir As Button
 End Class

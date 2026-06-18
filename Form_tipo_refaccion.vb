@@ -77,13 +77,13 @@ Public Class Form_tipo_refaccion
         Dim sqlstr As New SqlCommand("
             INSERT INTO tipo_piezas (
                 descripcion,
-                estatus,
+                estatus
             ) VALUES (
                 @descripcion,
                 @estatus
             )", constr)
 
-        sqlstr.Parameters.AddWithValue("@nombre", txt_descripcion.Text)
+        sqlstr.Parameters.AddWithValue("@descripcion", txt_descripcion.Text)
 
         If rb_habilitado.Checked = True Then
             estatus = "A"

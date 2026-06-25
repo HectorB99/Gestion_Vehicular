@@ -21,6 +21,8 @@ Public Class Form_detalles_servicio
 
         Form_registro_servicios.DataGridView1.Rows.Add(txt_cantidad.Text, txt_unidad.Text, txt_descripcion.Text, costo, costo_total, txt_operacion.Text)
 
+        action = 0
+
         Form_registro_servicios.total_servicio += costo_total
         Form_registro_servicios.tb_costo.Text = Math.Round((Form_registro_servicios.total_servicio), 2)
         CV_Clear()
@@ -50,6 +52,8 @@ Public Class Form_detalles_servicio
                 End If
             End If
         Next
+
+        action = 0
 
         Form_registro_servicios.tb_costo.Text = Math.Round((Form_registro_servicios.total_servicio), 2)
         Me.Hide()

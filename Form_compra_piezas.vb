@@ -87,6 +87,12 @@ Public Class Form_compra_piezas
         Dim selectedProveedor As ComboBoxItem = CType(cb_proveedores.SelectedItem, ComboBoxItem)
         Dim selectedTipoPieza As ComboBoxItem = CType(cb_tipo_pieza.SelectedItem, ComboBoxItem)
         Dim fechaActual As Date = Now.Date
+        Dim idvehiculo As Int32 = 0
+        If selectedItem IsNot Nothing Then
+            idvehiculo = selectedItem.id
+        End If
+
+
 
         Dim sqlstr As New SqlCommand("
             INSERT INTO compra_piezas (
@@ -114,7 +120,7 @@ Public Class Form_compra_piezas
 
         sqlstr.Parameters.Add("@fecha_compra", SqlDbType.Date).Value = dtp_compra.Value
         sqlstr.Parameters.Add("@fecha_captura", SqlDbType.Date).Value = fechaActual
-        sqlstr.Parameters.AddWithValue("@idvehiculo", selectedItem.id)
+        sqlstr.Parameters.AddWithValue("@idvehiculo", idvehiculo)
         sqlstr.Parameters.AddWithValue("@costo_pieza", SqlDbType.Float).Value = CDbl(txb_costo.Text)
         sqlstr.Parameters.AddWithValue("@tipo_pieza", selectedTipoPieza.id)
         sqlstr.Parameters.AddWithValue("@marca", txb_marca.Text)
@@ -162,7 +168,7 @@ Public Class Form_compra_piezas
 
     Public Sub CV_ClearData()
         cb_vehiculos.SelectedIndex = -1
-        dtp_compra.CustomFormat = " "
+        'dtp_compra.CustomFormat = " "
         txb_marca.Clear()
         txb_modelo.Clear()
         cb_tipo_pieza.SelectedIndex = -1

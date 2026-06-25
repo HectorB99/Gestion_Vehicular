@@ -69,7 +69,7 @@ Partial Class Form_reporte_controlvehicular
         ' 
         btn_reporte.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         btn_reporte.Font = New Font("Arial Narrow", 15.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btn_reporte.Location = New Point(831, 17)
+        btn_reporte.Location = New Point(831, 14)
         btn_reporte.Name = "btn_reporte"
         btn_reporte.Size = New Size(161, 41)
         btn_reporte.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class Form_reporte_controlvehicular
         btn_volver.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         btn_volver.FlatStyle = FlatStyle.System
         btn_volver.Font = New Font("Arial Narrow", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btn_volver.Location = New Point(831, 64)
+        btn_volver.Location = New Point(831, 61)
         btn_volver.Name = "btn_volver"
         btn_volver.Size = New Size(161, 41)
         btn_volver.TabIndex = 5
@@ -124,7 +124,7 @@ Partial Class Form_reporte_controlvehicular
         ' btn_export_xlsx
         ' 
         btn_export_xlsx.Font = New Font("Arial Narrow", 15.75F)
-        btn_export_xlsx.Location = New Point(996, 17)
+        btn_export_xlsx.Location = New Point(996, 14)
         btn_export_xlsx.Name = "btn_export_xlsx"
         btn_export_xlsx.Size = New Size(161, 41)
         btn_export_xlsx.TabIndex = 17
@@ -152,7 +152,7 @@ Partial Class Form_reporte_controlvehicular
         ' btn_imprimir
         ' 
         btn_imprimir.Font = New Font("Arial Narrow", 15.75F)
-        btn_imprimir.Location = New Point(998, 64)
+        btn_imprimir.Location = New Point(998, 61)
         btn_imprimir.Name = "btn_imprimir"
         btn_imprimir.Size = New Size(158, 41)
         btn_imprimir.TabIndex = 20

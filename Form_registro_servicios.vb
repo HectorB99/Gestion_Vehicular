@@ -64,6 +64,7 @@ Public Class Form_registro_servicios
     Public Sub CV_GuardarConsulta()
         Dim selectedItem As ComboBoxItem = CType(cb_vehiculos.SelectedItem, ComboBoxItem)
         Dim fechaActual As Date = Now.Date
+        Dim estatus As String
 
         Dim sqlstr As New SqlCommand("
             INSERT INTO servicios (
@@ -78,7 +79,8 @@ Public Class Form_registro_servicios
                 direccion_taller,
                 tel_taller,
                 mecanico_nombre,
-                tel_mecanico
+                tel_mecanico,
+                estatus
             ) VALUES (
                 @idvehiculo,
                 @fecha_captura,
@@ -91,9 +93,18 @@ Public Class Form_registro_servicios
                 @direccion_taller,
                 @tel_taller,
                 @mecanico_nombre,
-                @tel_mecanico
+                @tel_mecanico,
+                @estatus
             )
             SELECT SCOPE_IDENTITY();", constr)
+
+        If rb_programado.Checked Then
+            estatus = "P"
+        ElseIf rb_curso.Checked Then
+            estatus = "EC"
+        ElseIf rb_concluido.Checked Then
+            estatus = "C"
+        End If
 
         sqlstr.Parameters.AddWithValue("@idvehiculo", selectedItem.id)
         sqlstr.Parameters.Add("@fecha_captura", SqlDbType.Date).Value = fechaActual
@@ -107,6 +118,8 @@ Public Class Form_registro_servicios
         sqlstr.Parameters.AddWithValue("@tel_taller", tb_telefono_taller.Text)
         sqlstr.Parameters.AddWithValue("@mecanico_nombre", tb_nombre_mecanico.Text)
         sqlstr.Parameters.AddWithValue("@tel_mecanico", tb_tel_mecanico.Text)
+        sqlstr.Parameters.AddWithValue("@estatus", estatus)
+
 
         constr.Open()
         idservicio = Convert.ToInt32(sqlstr.ExecuteScalar())
@@ -183,8 +196,9 @@ Public Class Form_registro_servicios
     End Sub
 
     Public Sub CV_EditarRegistro()
-        MessageBox.Show("Actualizando registro de servicio")
         Dim selectedItem As ComboBoxItem = CType(cb_vehiculos.SelectedItem, ComboBoxItem)
+        Dim estatus As String
+
         Dim sqlstr As New SqlCommand("
             UPDATE servicios
             SET
@@ -198,9 +212,18 @@ Public Class Form_registro_servicios
                 direccion_taller = @direccion_taller,
                 tel_taller = @tel_taller,
                 mecanico_nombre = @mecanico_nombre,
-                tel_mecanico = @tel_mecanico
+                tel_mecanico = @tel_mecanico,
+                estatus = @estatus
             WHERE idservicio = @idservicio",
         constr)
+
+        If rb_programado.Checked Then
+            estatus = "P"
+        ElseIf rb_curso.Checked Then
+            estatus = "EC"
+        ElseIf rb_concluido.Checked Then
+            estatus = "C"
+        End If
 
         sqlstr.Parameters.AddWithValue("@idservicio", idservicio)
         sqlstr.Parameters.AddWithValue("@idvehiculo", selectedItem.id)
@@ -214,6 +237,7 @@ Public Class Form_registro_servicios
         sqlstr.Parameters.AddWithValue("@tel_taller", tb_telefono_taller.Text)
         sqlstr.Parameters.AddWithValue("@mecanico_nombre", tb_nombre_mecanico.Text)
         sqlstr.Parameters.AddWithValue("@tel_mecanico", tb_tel_mecanico.Text)
+        sqlstr.Parameters.AddWithValue("@estatus", estatus)
 
         constr.Open()
         sqlstr.ExecuteScalar()
@@ -280,6 +304,8 @@ Public Class Form_registro_servicios
         tb_nombre_mecanico.Clear()
         tb_tel_mecanico.Clear()
         DataGridView1.Rows.Clear()
+
+        total_servicio = 0
     End Sub
 
     Private Sub btn_borrar_Click(sender As Object, e As EventArgs) Handles btn_borrar.Click

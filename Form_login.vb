@@ -16,7 +16,14 @@ Public Class Form_login
         'Dim connectionString As String = "Data Source=DESKTOP-463V5VN\SQLEXPRESS;Initial Catalog=foliado;Trusted_Connection=True;Column Encryption Setting=Enabled;TrustServerCertificate=True;"
         'Dim connectionString As String = "Data Source=192.168.100.119,1433;Initial Catalog=foliado;Integrated Security=SSPI;Column Encryption Setting=Enabled;TrustServerCertificate=True;"
         'Dim connectionString As String = ConfigurationManager.ConnectionStrings("conection").ConnectionString
+
+
         Dim connectionString As String = GlobalConnStrg
+
+        If connectionString = "" Then
+            MessageBox.Show("Error. Seleccione sucursal para continuar")
+            Exit Sub
+        End If
 
         Dim contra As String = txt_contraseña.Text
         Dim nombre As String = txt_usuario.Text

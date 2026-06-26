@@ -4,7 +4,9 @@ Imports WinFormsApp1.Form_consulta_vehiculo
 Public Class Form_registro_servicios
     Public edicion_activada As Int32 = 0
     Public idservicio As Int32
-    Public total_servicio As Double = 0
+    Public subtotal_servicio As Double = 0
+    Public iva_añadido As Double = 0
+    Public costo_total_servicio As Double = 0
     Dim constr As New SqlConnection(GlobalConnStrg)
     'Dim constr As New SqlConnection("Data Source=192.168.100.119,1433;Initial Catalog=foliado;User ID=sa;Password=viaroot.viaroot;Encrypt=True;TrustServerCertificate=True;")
     Private Sub Form_registro_servicios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -80,7 +82,9 @@ Public Class Form_registro_servicios
                 tel_taller,
                 mecanico_nombre,
                 tel_mecanico,
-                estatus
+                estatus,
+                iva_añadido,
+                costo_total_servicio
             ) VALUES (
                 @idvehiculo,
                 @fecha_captura,
@@ -94,7 +98,9 @@ Public Class Form_registro_servicios
                 @tel_taller,
                 @mecanico_nombre,
                 @tel_mecanico,
-                @estatus
+                @estatus,
+                @iva_añadido,
+                @costo_total_servicio
             )
             SELECT SCOPE_IDENTITY();", constr)
 
@@ -112,7 +118,9 @@ Public Class Form_registro_servicios
         sqlstr.Parameters.Add("@fecha_entrada", SqlDbType.Date).Value = dtp_entrada.Value
         sqlstr.Parameters.Add("@fecha_salida", SqlDbType.Date).Value = dtp_salida.Value
         sqlstr.Parameters.AddWithValue("@tipo_servicio", tb_tipo_servicio.Text)
-        sqlstr.Parameters.AddWithValue("@costo_servicio", SqlDbType.Float).Value = CDbl(tb_costo.Text)
+        sqlstr.Parameters.AddWithValue("@costo_servicio", SqlDbType.Float).Value = CDbl(txt_subtotal.Text)
+        sqlstr.Parameters.AddWithValue("@iva_añadido", SqlDbType.Float).Value = CDbl(txt_iva_añadido.Text)
+        sqlstr.Parameters.AddWithValue("@costo_total_servicio", SqlDbType.Float).Value = CDbl(txt_costo_total.Text)
         sqlstr.Parameters.AddWithValue("@taller", tb_taller.Text)
         sqlstr.Parameters.AddWithValue("@direccion_taller", tb_direccion_taller.Text)
         sqlstr.Parameters.AddWithValue("@tel_taller", tb_telefono_taller.Text)
@@ -213,7 +221,9 @@ Public Class Form_registro_servicios
                 tel_taller = @tel_taller,
                 mecanico_nombre = @mecanico_nombre,
                 tel_mecanico = @tel_mecanico,
-                estatus = @estatus
+                estatus = @estatus,
+                iva_añadido = @iva_añadido,
+                costo_total_servicio = @costo_total_servicio
             WHERE idservicio = @idservicio",
         constr)
 
@@ -231,7 +241,9 @@ Public Class Form_registro_servicios
         sqlstr.Parameters.Add("@fecha_entrada", SqlDbType.Date).Value = dtp_entrada.Value
         sqlstr.Parameters.Add("@fecha_salida", SqlDbType.Date).Value = dtp_salida.Value
         sqlstr.Parameters.AddWithValue("@tipo_servicio", tb_tipo_servicio.Text)
-        sqlstr.Parameters.AddWithValue("@costo_servicio", SqlDbType.Float).Value = CDbl(tb_costo.Text)
+        sqlstr.Parameters.AddWithValue("@costo_servicio", SqlDbType.Float).Value = CDbl(txt_subtotal.Text)
+        sqlstr.Parameters.AddWithValue("@iva_añadido", SqlDbType.Float).Value = CDbl(txt_iva_añadido.Text)
+        sqlstr.Parameters.AddWithValue("@costo_total_servicio", SqlDbType.Float).Value = CDbl(txt_costo_total.Text)
         sqlstr.Parameters.AddWithValue("@taller", tb_taller.Text)
         sqlstr.Parameters.AddWithValue("@direccion_taller", tb_direccion_taller.Text)
         sqlstr.Parameters.AddWithValue("@tel_taller", tb_telefono_taller.Text)
@@ -251,43 +263,14 @@ Public Class Form_registro_servicios
 
     Public Sub CV_EditarDetallesServicio()
 
+        Dim sqlstrDelete As New SqlCommand("DELETE FROM detalles_servicio WHERE idservicio = @idservicio", constr)
+        sqlstrDelete.Parameters.AddWithValue("@idservicio", idservicio)
+
         constr.Open()
-        For Each dgRow As DataGridViewRow In DataGridView1.Rows
-
-            If Not dgRow.IsNewRow Then
-
-                Dim sqlstr As New SqlCommand("
-                    UPDATE detalles_servicio
-                    SET
-                        cant_piezas = @cantidad,
-                        unidad_pieza = @unidad,
-                        pieza = @pieza,
-                        costo_unitario = @costo,
-                        costo_total = @costo_total,
-                        descripcion = @operacion,
-                        idservicio = @idservicio
-                    WHERE iddetalle = @iddetalle
-                ", constr)
-
-                sqlstr.Parameters.AddWithValue("@cantidad", dgRow.Cells("cantidad").Value)
-                sqlstr.Parameters.AddWithValue("@unidad", dgRow.Cells("unidad").Value)
-                sqlstr.Parameters.AddWithValue("@pieza", dgRow.Cells("pieza").Value)
-                sqlstr.Parameters.AddWithValue("@costo", dgRow.Cells("costo").Value)
-                sqlstr.Parameters.AddWithValue("@costo_total", dgRow.Cells("costo_total").Value)
-                sqlstr.Parameters.AddWithValue("@operacion", dgRow.Cells("operacion").Value)
-                sqlstr.Parameters.AddWithValue("@iddetalle", dgRow.Cells("iddetalle").Value)
-                sqlstr.Parameters.AddWithValue("@idservicio", idservicio)
-
-                sqlstr.ExecuteNonQuery()
-
-            End If
-
-        Next
-
+        sqlstrDelete.ExecuteNonQuery()
         constr.Close()
 
-        DataGridView1.DataSource = Nothing
-        DataGridView1.Refresh()
+        CV_GuardarDetallesServicio(idservicio)
 
     End Sub
 
@@ -297,7 +280,7 @@ Public Class Form_registro_servicios
         dtp_entrada.CustomFormat = " "
         dtp_salida.CustomFormat = " "
         tb_tipo_servicio.Clear()
-        tb_costo.Clear()
+        txt_subtotal.Clear()
         tb_taller.Clear()
         tb_direccion_taller.Clear()
         tb_telefono_taller.Clear()
@@ -305,7 +288,9 @@ Public Class Form_registro_servicios
         tb_tel_mecanico.Clear()
         DataGridView1.Rows.Clear()
 
-        total_servicio = 0
+        iva_añadido = 0
+        subtotal_servicio = 0
+        costo_total_servicio = 0
     End Sub
 
     Private Sub btn_borrar_Click(sender As Object, e As EventArgs) Handles btn_borrar.Click
@@ -348,7 +333,7 @@ Public Class Form_registro_servicios
             idservicio = row("idservicio")
             Dim idvehiculo As String
             Dim estatus As String
-            total_servicio = row("costo_servicio")
+            subtotal_servicio = row("costo_servicio")
 
             If Not IsDBNull(row("idvehiculo")) Then
                 idvehiculo = row("idvehiculo")
@@ -387,7 +372,7 @@ Public Class Form_registro_servicios
             End If
 
             If Not IsDBNull(row("costo_servicio")) Then
-                tb_costo.Text = row("costo_servicio")
+                txt_subtotal.Text = row("costo_servicio")
             End If
 
             If Not IsDBNull(row("taller")) Then
@@ -422,7 +407,15 @@ Public Class Form_registro_servicios
                 End If
             End If
 
+            If Not IsDBNull(row("iva_añadido")) Then
+                iva_añadido = row("iva_añadido")
+                txt_iva_añadido.Text = row("iva_añadido")
+            End If
 
+            If Not IsDBNull(row("costo_total_servicio")) Then
+                costo_total_servicio = row("costo_total_servicio")
+                txt_costo_total.Text = row("costo_total_servicio")
+            End If
         End If
 
         CV_ConsultaDetallesServicio(idservicio)
@@ -466,6 +459,22 @@ Public Class Form_registro_servicios
                 Form_detalles_servicio.Show()
                 Form_detalles_servicio.CV_CargarDatos(fila)
             End If
+        End If
+    End Sub
+
+    Private Sub txt_iva_añadido_TextChanged(sender As Object, e As EventArgs) Handles txt_iva_añadido.TextChanged
+        If costo_total_servicio <> 0 Then
+            costo_total_servicio -= iva_añadido
+            iva_añadido = CDbl(txt_iva_añadido.Text)
+            costo_total_servicio += iva_añadido
+            txt_costo_total.Text = costo_total_servicio
+        ElseIf txt_iva_añadido.Text = "" Then
+            costo_total_servicio -= iva_añadido
+            iva_añadido = 0
+        Else
+            iva_añadido = CDbl(txt_iva_añadido.Text)
+            costo_total_servicio += iva_añadido
+            txt_costo_total.Text = costo_total_servicio
         End If
     End Sub
 End Class

@@ -7,7 +7,7 @@ Public Class Form_detalles_servicio
         If action = 0 Then
             CV_InsertarLinea()
         Else
-            CV_EditarLina()
+            CV_EditarLinea()
         End If
 
     End Sub
@@ -23,13 +23,15 @@ Public Class Form_detalles_servicio
 
         action = 0
 
-        Form_registro_servicios.total_servicio += costo_total
-        Form_registro_servicios.tb_costo.Text = Math.Round((Form_registro_servicios.total_servicio), 2)
+        Form_registro_servicios.subtotal_servicio += costo_total
+        Form_registro_servicios.costo_total_servicio += costo_total
+        Form_registro_servicios.txt_subtotal.Text = Math.Round((Form_registro_servicios.subtotal_servicio), 2)
+        Form_registro_servicios.txt_costo_total.Text = Math.Round((Form_registro_servicios.costo_total_servicio), 2)
         CV_Clear()
         Me.Hide()
     End Sub
 
-    Public Sub CV_EditarLina()
+    Public Sub CV_EditarLinea()
         Dim cantidad As Int32 = Int32.Parse(txt_cantidad.Text)
         Dim costo As Double = Double.Parse(txt_costo_pieza.Text)
         Dim costo_total As Double
@@ -43,19 +45,23 @@ Public Class Form_detalles_servicio
         Form_registro_servicios.DataGridView1.Rows(rowIndex).Cells(4).Value = costo_total
         Form_registro_servicios.DataGridView1.Rows(rowIndex).Cells(5).Value = txt_operacion.Text
 
-        Form_registro_servicios.total_servicio = 0
+        Form_registro_servicios.costo_total_servicio -= Form_registro_servicios.subtotal_servicio
+        Form_registro_servicios.subtotal_servicio = 0
         For Each row As DataGridViewRow In Form_registro_servicios.DataGridView1.Rows
             If Not row.IsNewRow AndAlso row.Cells("costo_total").Value IsNot Nothing Then
                 Dim cellValue As Decimal
                 If Decimal.TryParse(row.Cells("costo_total").Value, cellValue) Then
-                    Form_registro_servicios.total_servicio += cellValue
+                    Form_registro_servicios.subtotal_servicio += cellValue
                 End If
             End If
         Next
 
+        Form_registro_servicios.costo_total_servicio += Form_registro_servicios.subtotal_servicio
         action = 0
 
-        Form_registro_servicios.tb_costo.Text = Math.Round((Form_registro_servicios.total_servicio), 2)
+        Form_registro_servicios.txt_subtotal.Text = Math.Round((Form_registro_servicios.subtotal_servicio), 2)
+        Form_registro_servicios.txt_costo_total.Text = Math.Round((Form_registro_servicios.costo_total_servicio), 2)
+
         Me.Hide()
     End Sub
 

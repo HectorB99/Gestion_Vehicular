@@ -38,7 +38,7 @@ Partial Class Form_registro_servicios
         dtp_salida = New DateTimePicker()
         dtp_programada = New DateTimePicker()
         tb_tipo_servicio = New TextBox()
-        tb_costo = New TextBox()
+        txt_subtotal = New TextBox()
         tb_taller = New TextBox()
         tb_direccion_taller = New TextBox()
         tb_telefono_taller = New TextBox()
@@ -59,9 +59,13 @@ Partial Class Form_registro_servicios
         Label11 = New Label()
         btn_añadir = New Button()
         GroupBox1 = New GroupBox()
+        rb_concluido = New RadioButton()
         rb_curso = New RadioButton()
         rb_programado = New RadioButton()
-        rb_concluido = New RadioButton()
+        Label12 = New Label()
+        txt_iva_añadido = New TextBox()
+        Label13 = New Label()
+        txt_costo_total = New TextBox()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         SuspendLayout()
@@ -71,7 +75,7 @@ Partial Class Form_registro_servicios
         lbl_vehiculo.AutoSize = True
         lbl_vehiculo.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lbl_vehiculo.ImageAlign = ContentAlignment.TopRight
-        lbl_vehiculo.Location = New Point(100, 88)
+        lbl_vehiculo.Location = New Point(120, 86)
         lbl_vehiculo.Name = "lbl_vehiculo"
         lbl_vehiculo.Size = New Size(88, 25)
         lbl_vehiculo.TabIndex = 0
@@ -81,7 +85,7 @@ Partial Class Form_registro_servicios
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label1.Location = New Point(25, 146)
+        Label1.Location = New Point(45, 144)
         Label1.Name = "Label1"
         Label1.Size = New Size(163, 25)
         Label1.TabIndex = 1
@@ -91,7 +95,7 @@ Partial Class Form_registro_servicios
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label2.Location = New Point(44, 201)
+        Label2.Location = New Point(64, 199)
         Label2.Name = "Label2"
         Label2.Size = New Size(144, 25)
         Label2.TabIndex = 2
@@ -101,7 +105,7 @@ Partial Class Form_registro_servicios
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label3.Location = New Point(10, 261)
+        Label3.Location = New Point(30, 259)
         Label3.Name = "Label3"
         Label3.Size = New Size(178, 25)
         Label3.TabIndex = 3
@@ -111,7 +115,7 @@ Partial Class Form_registro_servicios
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label4.Location = New Point(33, 321)
+        Label4.Location = New Point(53, 319)
         Label4.Name = "Label4"
         Label4.Size = New Size(155, 25)
         Label4.TabIndex = 4
@@ -121,7 +125,7 @@ Partial Class Form_registro_servicios
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label5.Location = New Point(668, 88)
+        Label5.Location = New Point(708, 88)
         Label5.Name = "Label5"
         Label5.Size = New Size(59, 25)
         Label5.TabIndex = 5
@@ -131,7 +135,7 @@ Partial Class Form_registro_servicios
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label6.Location = New Point(547, 146)
+        Label6.Location = New Point(587, 146)
         Label6.Name = "Label6"
         Label6.Size = New Size(180, 25)
         Label6.TabIndex = 6
@@ -141,7 +145,7 @@ Partial Class Form_registro_servicios
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label7.Location = New Point(475, 204)
+        Label7.Location = New Point(515, 204)
         Label7.Name = "Label7"
         Label7.Size = New Size(252, 25)
         Label7.TabIndex = 7
@@ -151,7 +155,7 @@ Partial Class Form_registro_servicios
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label8.Location = New Point(519, 259)
+        Label8.Location = New Point(559, 259)
         Label8.Name = "Label8"
         Label8.Size = New Size(208, 25)
         Label8.TabIndex = 8
@@ -161,7 +165,7 @@ Partial Class Form_registro_servicios
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label9.Location = New Point(435, 314)
+        Label9.Location = New Point(475, 314)
         Label9.Name = "Label9"
         Label9.Size = New Size(292, 25)
         Label9.TabIndex = 9
@@ -171,89 +175,89 @@ Partial Class Form_registro_servicios
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
-        Label10.Location = New Point(22, 384)
+        Label10.Location = New Point(12, 423)
         Label10.Name = "Label10"
-        Label10.Size = New Size(166, 25)
+        Label10.Size = New Size(196, 25)
         Label10.TabIndex = 10
-        Label10.Text = "Costo de Servicio"
+        Label10.Text = "Subtotal del Servicio"
         ' 
         ' cb_vehiculos
         ' 
         cb_vehiculos.FormattingEnabled = True
-        cb_vehiculos.Location = New Point(194, 90)
+        cb_vehiculos.Location = New Point(225, 90)
         cb_vehiculos.Name = "cb_vehiculos"
         cb_vehiculos.Size = New Size(149, 23)
         cb_vehiculos.TabIndex = 11
         ' 
         ' dtp_entrada
         ' 
-        dtp_entrada.Location = New Point(194, 148)
+        dtp_entrada.Location = New Point(225, 148)
         dtp_entrada.Name = "dtp_entrada"
         dtp_entrada.Size = New Size(149, 23)
         dtp_entrada.TabIndex = 12
         ' 
         ' dtp_salida
         ' 
-        dtp_salida.Location = New Point(194, 206)
+        dtp_salida.Location = New Point(225, 206)
         dtp_salida.Name = "dtp_salida"
         dtp_salida.Size = New Size(149, 23)
         dtp_salida.TabIndex = 13
         ' 
         ' dtp_programada
         ' 
-        dtp_programada.Location = New Point(194, 263)
+        dtp_programada.Location = New Point(225, 263)
         dtp_programada.Name = "dtp_programada"
         dtp_programada.Size = New Size(149, 23)
         dtp_programada.TabIndex = 14
         ' 
         ' tb_tipo_servicio
         ' 
-        tb_tipo_servicio.Location = New Point(194, 321)
+        tb_tipo_servicio.Location = New Point(225, 321)
         tb_tipo_servicio.Name = "tb_tipo_servicio"
         tb_tipo_servicio.Size = New Size(149, 23)
         tb_tipo_servicio.TabIndex = 15
         ' 
-        ' tb_costo
+        ' txt_subtotal
         ' 
-        tb_costo.Enabled = False
-        tb_costo.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        tb_costo.Location = New Point(194, 384)
-        tb_costo.Name = "tb_costo"
-        tb_costo.ReadOnly = True
-        tb_costo.Size = New Size(149, 29)
-        tb_costo.TabIndex = 16
+        txt_subtotal.Enabled = False
+        txt_subtotal.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txt_subtotal.Location = New Point(225, 421)
+        txt_subtotal.Name = "txt_subtotal"
+        txt_subtotal.ReadOnly = True
+        txt_subtotal.Size = New Size(149, 29)
+        txt_subtotal.TabIndex = 16
         ' 
         ' tb_taller
         ' 
-        tb_taller.Location = New Point(733, 90)
+        tb_taller.Location = New Point(773, 90)
         tb_taller.Name = "tb_taller"
         tb_taller.Size = New Size(149, 23)
         tb_taller.TabIndex = 17
         ' 
         ' tb_direccion_taller
         ' 
-        tb_direccion_taller.Location = New Point(733, 146)
+        tb_direccion_taller.Location = New Point(773, 146)
         tb_direccion_taller.Name = "tb_direccion_taller"
         tb_direccion_taller.Size = New Size(149, 23)
         tb_direccion_taller.TabIndex = 18
         ' 
         ' tb_telefono_taller
         ' 
-        tb_telefono_taller.Location = New Point(733, 204)
+        tb_telefono_taller.Location = New Point(773, 204)
         tb_telefono_taller.Name = "tb_telefono_taller"
         tb_telefono_taller.Size = New Size(149, 23)
         tb_telefono_taller.TabIndex = 19
         ' 
         ' tb_nombre_mecanico
         ' 
-        tb_nombre_mecanico.Location = New Point(733, 261)
+        tb_nombre_mecanico.Location = New Point(773, 261)
         tb_nombre_mecanico.Name = "tb_nombre_mecanico"
         tb_nombre_mecanico.Size = New Size(149, 23)
         tb_nombre_mecanico.TabIndex = 20
         ' 
         ' tb_tel_mecanico
         ' 
-        tb_tel_mecanico.Location = New Point(733, 316)
+        tb_tel_mecanico.Location = New Point(773, 316)
         tb_tel_mecanico.Name = "tb_tel_mecanico"
         tb_tel_mecanico.Size = New Size(149, 23)
         tb_tel_mecanico.TabIndex = 21
@@ -304,7 +308,7 @@ Partial Class Form_registro_servicios
         DataGridView1.Columns.AddRange(New DataGridViewColumn() {cantidad, unidad, pieza, costo, costo_total, operacion, iddetalle})
         DataGridView1.Location = New Point(25, 510)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(857, 291)
+        DataGridView1.Size = New Size(916, 291)
         DataGridView1.TabIndex = 26
         ' 
         ' cantidad
@@ -362,7 +366,7 @@ Partial Class Form_registro_servicios
         ' btn_añadir
         ' 
         btn_añadir.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold)
-        btn_añadir.Location = New Point(685, 454)
+        btn_añadir.Location = New Point(725, 454)
         btn_añadir.Name = "btn_añadir"
         btn_añadir.Size = New Size(197, 41)
         btn_añadir.TabIndex = 28
@@ -374,12 +378,23 @@ Partial Class Form_registro_servicios
         GroupBox1.Controls.Add(rb_concluido)
         GroupBox1.Controls.Add(rb_curso)
         GroupBox1.Controls.Add(rb_programado)
-        GroupBox1.Location = New Point(579, 359)
+        GroupBox1.Location = New Point(619, 359)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(303, 54)
         GroupBox1.TabIndex = 29
         GroupBox1.TabStop = False
         GroupBox1.Text = "Estatus"
+        ' 
+        ' rb_concluido
+        ' 
+        rb_concluido.AutoSize = True
+        rb_concluido.Location = New Point(221, 22)
+        rb_concluido.Name = "rb_concluido"
+        rb_concluido.Size = New Size(80, 19)
+        rb_concluido.TabIndex = 30
+        rb_concluido.TabStop = True
+        rb_concluido.Text = "Concluido"
+        rb_concluido.UseVisualStyleBackColor = True
         ' 
         ' rb_curso
         ' 
@@ -403,23 +418,53 @@ Partial Class Form_registro_servicios
         rb_programado.Text = "Programado"
         rb_programado.UseVisualStyleBackColor = True
         ' 
-        ' rb_concluido
+        ' Label12
         ' 
-        rb_concluido.AutoSize = True
-        rb_concluido.Location = New Point(221, 22)
-        rb_concluido.Name = "rb_concluido"
-        rb_concluido.Size = New Size(80, 19)
-        rb_concluido.TabIndex = 30
-        rb_concluido.TabStop = True
-        rb_concluido.Text = "Concluido"
-        rb_concluido.UseVisualStyleBackColor = True
+        Label12.AutoSize = True
+        Label12.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold)
+        Label12.Location = New Point(87, 373)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(121, 25)
+        Label12.TabIndex = 30
+        Label12.Text = "IVA añadido"
+        ' 
+        ' txt_iva_añadido
+        ' 
+        txt_iva_añadido.Location = New Point(225, 373)
+        txt_iva_añadido.Name = "txt_iva_añadido"
+        txt_iva_añadido.Size = New Size(149, 23)
+        txt_iva_añadido.TabIndex = 31
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label13.Location = New Point(164, 464)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(210, 32)
+        Label13.TabIndex = 32
+        Label13.Text = "Total del Servicio"
+        ' 
+        ' txt_costo_total
+        ' 
+        txt_costo_total.Enabled = False
+        txt_costo_total.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txt_costo_total.Location = New Point(380, 466)
+        txt_costo_total.Name = "txt_costo_total"
+        txt_costo_total.ReadOnly = True
+        txt_costo_total.Size = New Size(149, 29)
+        txt_costo_total.TabIndex = 33
         ' 
         ' Form_registro_servicios
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ActiveCaption
-        ClientSize = New Size(907, 813)
+        ClientSize = New Size(953, 813)
+        Controls.Add(txt_costo_total)
+        Controls.Add(Label13)
+        Controls.Add(txt_iva_añadido)
+        Controls.Add(Label12)
         Controls.Add(GroupBox1)
         Controls.Add(btn_añadir)
         Controls.Add(Label11)
@@ -433,7 +478,7 @@ Partial Class Form_registro_servicios
         Controls.Add(tb_telefono_taller)
         Controls.Add(tb_direccion_taller)
         Controls.Add(tb_taller)
-        Controls.Add(tb_costo)
+        Controls.Add(txt_subtotal)
         Controls.Add(tb_tipo_servicio)
         Controls.Add(dtp_programada)
         Controls.Add(dtp_salida)
@@ -475,7 +520,7 @@ Partial Class Form_registro_servicios
     Friend WithEvents dtp_salida As DateTimePicker
     Friend WithEvents dtp_programada As DateTimePicker
     Friend WithEvents tb_tipo_servicio As TextBox
-    Friend WithEvents tb_costo As TextBox
+    Friend WithEvents txt_subtotal As TextBox
     Friend WithEvents tb_taller As TextBox
     Friend WithEvents tb_direccion_taller As TextBox
     Friend WithEvents tb_telefono_taller As TextBox
@@ -499,4 +544,8 @@ Partial Class Form_registro_servicios
     Friend WithEvents rb_concluido As RadioButton
     Friend WithEvents rb_curso As RadioButton
     Friend WithEvents rb_programado As RadioButton
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txt_iva_añadido As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txt_costo_total As TextBox
 End Class

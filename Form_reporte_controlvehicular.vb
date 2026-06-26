@@ -269,7 +269,9 @@ Public Class Form_reporte_controlvehicular
                 servicios.tel_taller, 
                 servicios.mecanico_nombre, 
                 servicios.tel_mecanico,
-                servicios.estatus
+                servicios.estatus,
+                servicios.iva_añadido,
+                servicios.costo_total_servicio
             FROM servicios
             INNER JOIN vehiculos
             On servicios.idvehiculo = vehiculos.idvehiculo"
@@ -318,7 +320,9 @@ Public Class Form_reporte_controlvehicular
         DataGridView1.Columns("fecha_entrada").HeaderText = "Fecha de Entrada"
         DataGridView1.Columns("fecha_salida").HeaderText = "Fecha de Salida"
         DataGridView1.Columns("tipo_servicio").HeaderText = "Tipo de Servicio"
-        DataGridView1.Columns("costo_servicio").HeaderText = "Costo del Servicio"
+        DataGridView1.Columns("costo_servicio").HeaderText = "Subtotal"
+        DataGridView1.Columns("iva_añadido").HeaderText = "IVA"
+        DataGridView1.Columns("costo_total_servicio").HeaderText = "Costo Total del Servicio"
         DataGridView1.Columns("taller").HeaderText = "Taller"
         DataGridView1.Columns("direccion_taller").HeaderText = "Dirección"
         DataGridView1.Columns("tel_taller").HeaderText = "Télefono del Taller"
@@ -328,6 +332,8 @@ Public Class Form_reporte_controlvehicular
         DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
 
         DataGridView1.Columns("costo_servicio").DefaultCellStyle.Format = "$#,##0.00"
+        DataGridView1.Columns("iva_añadido").DefaultCellStyle.Format = "$#,##0.00"
+        DataGridView1.Columns("costo_total_servicio").DefaultCellStyle.Format = "$#,##0.00"
 
         constr.Close()
 

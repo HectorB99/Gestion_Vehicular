@@ -633,6 +633,7 @@ Public Class Form_reporte_controlvehicular
         Dim selectedItem As ComboBoxItem = CType(cb_vehiculos.SelectedItem, ComboBoxItem)
         Dim claveunidad As String
         Dim rutaCarpeta As String = "C:\Reporte Vehicular\"
+        'Dim rutaCarpeta As String = "C:\Control Vehicular\Reporte Vehicular\"
         Dim nombreArchivo As String
         claveunidad = selectedItem.clave
 

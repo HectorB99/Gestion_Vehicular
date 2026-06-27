@@ -14,6 +14,7 @@ Public Class Form_mostrador_fotos
         Using openFileDialog As New OpenFileDialog()
 
             openFileDialog.InitialDirectory = "\\mochisconc\Control Vehicular\Fotos de Bitacora Vehicular"
+            'openFileDialog.InitialDirectory = "C:\Control Vehicular\Fotos de Bitacora Vehicular"
             openFileDialog.Title = "Seleccione una foto"
             openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|All Files (*.*)|*.*"
             openFileDialog.FilterIndex = 2
@@ -37,6 +38,7 @@ Public Class Form_mostrador_fotos
         Dim claveinterna As String
         'Dim fecha As String = Date.Now.ToString("dd_MM_yyyy")
         Dim ruta = "\\mochisconc\Control Vehicular\Fotos de Bitacora Vehicular\" & fecha
+        'Dim ruta = "C:\Control Vehicular\Fotos de Bitacora Vehicular\" & fecha
 
         Dim separacion() As String = filePath.Split("\")
         Dim ultimo As Int32 = separacion.Length()

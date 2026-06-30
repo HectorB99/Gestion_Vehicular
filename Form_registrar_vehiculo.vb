@@ -103,7 +103,7 @@ Public Class Form_registrar_vehiculo
                 @fecha_ultimo_cambio_bateria,
                 @fecha_vigencia_tarjeta_circulacion)", constr)
 
-        Dim estatus As String
+        Dim estatus As String = "A"
         'Dim selectedItem As ComboBoxItem = CType(cb_tipocombustible.SelectedItem, ComboBoxItem)
         If rb_activo.Checked = True Then
             estatus = "A"
@@ -152,7 +152,7 @@ Public Class Form_registrar_vehiculo
         'sqlstr.Parameters.AddWithValue("@kilometraje_ultima_visita_taller", Convert.ToInt32(txt_km_ultimo_taller.Text))
         sqlstr.Parameters.AddWithValue("@poliza_seguro", txt_poliza_seguro.Text)
         sqlstr.Parameters.Add("@fecha_vigencia_poliza", SqlDbType.Date).Value = dtp_vigencia_poliza.Value
-        sqlstr.Parameters.Add("@dtp_ultima_bateria", SqlDbType.Date).Value = dtp_ultima_bateria.Value
+        sqlstr.Parameters.Add("@fecha_ultimo_cambio_bateria", SqlDbType.Date).Value = dtp_ultima_bateria.Value
         sqlstr.Parameters.Add("@fecha_vigencia_tarjeta_circulacion", SqlDbType.Date).Value = dtp_vigencia_tarjeta.Value
 
         constr.Open()

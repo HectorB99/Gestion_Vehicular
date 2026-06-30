@@ -21,9 +21,11 @@ Public Class Form_sucursal
     Private Sub btn_aceptar_Click(sender As Object, e As EventArgs) Handles btn_aceptar.Click
 
         If cb_sucursal.SelectedValue = 1 Then
-            GlobalConnStrg = "Data Source=192.168.100.3,1433;Initial Catalog=foliado;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
+            GlobalConnStrg = "Data Source=192.168.100.97,1433;Initial Catalog=foliado;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
+            'GlobalConnStrg = "Data Source=.\SQLEXPRESS;Initial Catalog=foliado;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
         Else
-            GlobalConnStrg = "Data Source=192.168.100.3,1433;Initial Catalog=CVNavojoa;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
+            GlobalConnStrg = "Data Source=192.168.100.97,1433;Initial Catalog=CVNavojoa;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
+            'GlobalConnStrg = "Data Source=.\SQLEXPRESS;Initial Catalog=CVNavojoa;User ID=sa;Password=Chelo.viaroot1712;Encrypt=True;TrustServerCertificate=True;"
         End If
 
         Me.Hide()
